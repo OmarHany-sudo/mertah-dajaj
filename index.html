@@ -234,89 +234,130 @@
       </form>
     </div>
 
+ <!-- Reviews Section -->
+<section id="reviews" class="py-16 bg-gray-50">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-6 text-gray-800">تقييمات العملاء ⭐</h2>
+
     <!-- Reviews List -->
-    <div id="reviewsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    <div id="reviews-list" class="space-y-4 mb-8"></div>
+
+    <!-- Add Review Form -->
+    <div class="bg-white p-6 rounded-2xl shadow-md">
+      <h3 class="text-xl font-semibold mb-4 text-gray-700">ضيف تقييمك 👇</h3>
+      <form id="review-form" class="space-y-4">
+        <input
+          type="text"
+          id="name"
+          placeholder="اسمك"
+          class="w-full p-3 border rounded-lg focus:ring focus:ring-orange-300 outline-none"
+          required
+        />
+        <select
+          id="rating"
+          class="w-full p-3 border rounded-lg focus:ring focus:ring-orange-300 outline-none"
+          required
+        >
+          <option value="">اختار التقييم</option>
+          <option value="5">⭐⭐⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="1">⭐</option>
+        </select>
+        <textarea
+          id="comment"
+          placeholder="اكتب رأيك..."
+          class="w-full p-3 border rounded-lg focus:ring focus:ring-orange-300 outline-none"
+          required
+        ></textarea>
+        <button
+          type="submit"
+          class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition-all"
+        >
+          نشر التقييم 🚀
+        </button>
+      </form>
+    </div>
   </div>
 </section>
 
-<script>
-  const form = document.getElementById("reviewForm");
-  const stars = document.querySelectorAll("#stars span");
-  const reviewsList = document.getElementById("reviewsList");
+<!-- Firebase Reviews Script -->
+<script type="module">
+  import { db } from "./firebase.js";
+  import {
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-  let selectedRating = 0;
+  const reviewForm = document.getElementById("review-form");
+  const reviewsList = document.getElementById("reviews-list");
 
-  // تفعيل النجوم ⭐
-  stars.forEach((star) => {
-    star.addEventListener("click", () => {
-      selectedRating = parseInt(star.getAttribute("data-star"));
-      stars.forEach((s, i) => {
-        s.classList.toggle("text-yellow-400", i < selectedRating);
-        s.classList.toggle("text-gray-400", i >= selectedRating);
-      });
-    });
-  });
+  // ✅ تحميل التقييمات
+  async function loadReviews() {
+    reviewsList.innerHTML = "<p>جاري تحميل التقييمات...</p>";
 
-  // تحميل التقييمات من LocalStorage
-  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-  renderReviews();
+    const q = query(collection(db, "reviews"), orderBy("timestamp", "desc"));
+    const querySnapshot = await getDocs(q);
 
-  // إرسال التقييم
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("name").value;
-    const message = document.getElementById("message").value;
-
-    if (selectedRating === 0) {
-      alert("من فضلك اختر عدد النجوم 🌟");
+    if (querySnapshot.empty) {
+      reviewsList.innerHTML = "<p>لسه مفيش تقييمات 😅</p>";
       return;
     }
 
-    const review = {
-      name,
-      message,
-      rating: selectedRating,
-      date: new Date().toLocaleDateString("ar-EG"),
-    };
+    reviewsList.innerHTML = "";
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const stars = "⭐".repeat(data.rating);
+      const reviewHTML = `
+        <div class="bg-white shadow-md rounded-xl p-5 text-right">
+          <h4 class="font-semibold text-lg text-orange-600">${data.name}</h4>
+          <p class="text-yellow-500 mb-2">${stars}</p>
+          <p class="text-gray-700">${data.comment}</p>
+        </div>
+      `;
+      reviewsList.innerHTML += reviewHTML;
+    });
+  }
 
-    reviews.push(review);
-    localStorage.setItem("reviews", JSON.stringify(reviews));
+  // ✅ إضافة تقييم جديد
+  reviewForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    form.reset();
-    selectedRating = 0;
-    stars.forEach((s) => s.classList.remove("text-yellow-400"));
-    renderReviews();
+    const name = document.getElementById("name").value.trim();
+    const rating = parseInt(document.getElementById("rating").value);
+    const comment = document.getElementById("comment").value.trim();
+
+    if (!name || !rating || !comment) {
+      alert("اكمل كل البيانات يا نجم 😅");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "reviews"), {
+        name,
+        rating,
+        comment,
+        timestamp: serverTimestamp()
+      });
+
+      reviewForm.reset();
+      alert("تم نشر تقييمك بنجاح ❤️");
+      loadReviews(); // تحديث التقييمات مباشرة بعد الإضافة
+    } catch (error) {
+      console.error("Error adding review:", error);
+      alert("في مشكلة حصلت أثناء الإرسال 😢");
+    }
   });
 
-  // عرض التقييمات
-  function renderReviews() {
-    reviewsList.innerHTML = "";
-    reviews
-      .slice()
-      .reverse()
-      .forEach((r) => {
-        const starsHTML = Array.from({ length: 5 })
-          .map((_, i) =>
-            i < r.rating
-              ? `<span class="material-symbols-outlined text-yellow-400">star</span>`
-              : `<span class="material-symbols-outlined text-gray-400">star</span>`
-          )
-          .join("");
-
-        const div = document.createElement("div");
-        div.className = "bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md";
-        div.innerHTML = `
-          <div class="flex items-center justify-between mb-3">
-            <p class="font-medium">${r.name}</p>
-            <p class="text-sm text-text-muted-light dark:text-text-muted-dark">${r.date}</p>
-          </div>
-          <div class="flex gap-0.5 mb-2">${starsHTML}</div>
-          <p class="text-text-light dark:text-text-dark">${r.message}</p>
-        `;
-        reviewsList.appendChild(div);
-      });
-  }
+  // تحميل التقييمات أول ما الصفحة تفتح
+  loadReviews();
 </script>
+
 
 
   <!-- Contact Section -->
@@ -379,5 +420,29 @@
       });
     });
   </script>
+
+  <script type="module">
+  import { app, db, auth, storage } from "./firebase.js";
+
+  console.log("Firebase loaded successfully:", app.name);
+
+  // مثال سريع لإضافة بيانات للتأكد إن كل حاجة شغالة 🔥
+  import { collection, addDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+  const addTestData = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "test"), {
+        message: "Hello Omar 👑🔥",
+        time: new Date()
+      });
+      console.log("Document added with ID:", docRef.id);
+    } catch (e) {
+      console.error("Error adding document:", e);
+    }
+  };
+
+  addTestData();
+</script>
+
 </body>
 </html>
