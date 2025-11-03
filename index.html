@@ -1,1 +1,254 @@
-hi
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مرتاح دجاج</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#b22222',
+            secondary: '#eab308',
+            'background-light': '#f8f6f6',
+            'background-dark': '#211111',
+            'text-light': '#1b0e0e',
+            'text-dark': '#f8f6f6',
+            'text-muted-light': '#994d51',
+            'text-muted-dark': '#d6aeb0',
+          },
+          fontFamily: {
+            display: ['Noto Serif', 'serif'],
+            sans: ['Noto Sans', 'sans-serif'],
+          },
+          borderRadius: {
+            DEFAULT: '0.5rem',
+            lg: '0.75rem',
+            xl: '1rem',
+            full: '9999px',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Noto Sans', sans-serif;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Noto Serif', serif;
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center space-x-2 space-x-reverse">
+          <span class="text-2xl font-bold text-primary">دجاج</span>
+          <span class="text-2xl font-bold text-secondary">مرتاح</span>
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex space-x-6 space-x-reverse text-sm font-medium">
+          <a class="hover:text-primary dark:hover:text-secondary transition-colors" href="#menu">القائمة</a>
+          <a class="hover:text-primary dark:hover:text-secondary transition-colors" href="#reviews">آراء العملاء</a>
+          <a class="hover:text-primary dark:hover:text-secondary transition-colors" href="#contact">تواصل معنا</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-button" class="md:hidden text-text-light dark:text-text-dark">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-700">
+      <nav class="px-4 py-3 space-y-2">
+        <a class="block py-2 font-medium hover:text-primary dark:hover:text-secondary transition-colors" href="#menu">القائمة</a>
+        <a class="block py-2 font-medium hover:text-primary dark:hover:text-secondary transition-colors" href="#reviews">آراء العملاء</a>
+        <a class="block py-2 font-medium hover:text-primary dark:hover:text-secondary transition-colors" href="#contact">تواصل معنا</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative bg-cover bg-center min-h-[80vh] flex items-center justify-center"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHktlTUhooXmViOa9NMoqyFM6xiVOjkPoifMx5wdHLUPWmESRNwD8Dii08thKPtvGQ025_SKePri89dZCeNDCVrUlPFjBbM2rjfVuDMKxbFlMJlA_U1uH_kTo160SZnPFwO6ytZlG-Vo7aHu2ndhvKv4NcJUp1sTflmjWgqCCMoz8meEYoppzZB_I6mWc2taAtfgEz0NpvQ-lt5yJGXJ_x4JoHzHrcQIMWWcVGNyjnkpl1nz0pip9BMnlHdwCv377XBANDcoM3gzo');">
+    <div class="text-center px-4 max-w-3xl">
+      <div class="flex flex-col items-center gap-3">
+        <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] sm:text-5xl font-display">
+          مرتاح دجاج
+        </h1>
+        <p class="text-white text-xl sm:text-2xl font-medium max-w-2xl px-4 text-center font-sans">
+          ليه تبقى مضغوط لما ممكن تكون مرتاح
+        </p>
+      </div>
+      <a href="#menu"
+        class="inline-block bg-primary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full text-lg mt-6 transition-all transform hover:scale-105 shadow-lg">
+        اطلب الآن بـ 425 جنيه 🔥
+      </a>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="py-16 sm:py-24 bg-background-light dark:bg-background-dark/30">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl sm:text-4xl font-bold font-display mb-12 text-text-light dark:text-text-dark">قائمة الطعام</h2>
+      <div class="max-w-5xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2 h-64 md:h-auto bg-cover bg-center"
+            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXH5v3sTF0QZ4vbgaoQp-F3ue6ctyLCxnoqhZjxZixSX0v47LkQr6NdACL4CiH0o0-OGC6NdEIoJ9wtcI0hQuBGxvJm4I4TLp9-JhdqlxQzBhVyRKAB7YoxbXtM7_sICi2dGYIOfrEnJ1IGEbNnCgTgm9zRn4khJVxsQAM_V2Wdp0KyMl6DThoY3u1ynOpbak4S5NbzlTyQl6WZ-53kSe207wKSz9f3IAU0mSzxWMC6iDVJZPduW2NpBacKIeputw7HNUI3NQYBxo');">
+          </div>
+          <div class="md:w-1/2 p-8 flex flex-col justify-center">
+            <h3 class="text-2xl font-bold font-display text-text-light dark:text-text-dark mb-3">وجبة الكبسة الرئيسية</h3>
+            <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+              وصفة شهية تبرز بهاراتها الأصيلة ودجاجها الطري. مزيج مثالي من الأرز البسمتي الفاخر مع قطع الدجاج المتبلة والمطهوة بإتقان.
+            </p>
+            <p class="text-secondary text-xl font-bold mb-6">425 جنيه</p>
+            <a href="order.html"
+              class="inline-block bg-primary hover:bg-red-700 text-white font-medium py-2 px-6 rounded-lg transition-transform transform hover:scale-105 w-fit">
+              اطلب الآن
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section id="reviews" class="py-16 sm:py-24 bg-gray-50 dark:bg-background-dark/30">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl sm:text-4xl font-bold font-display mb-12 text-text-light dark:text-text-dark">آراء عملائنا</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Review 1 -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div class="flex items-center gap-3 mb-3">
+            <img class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf7oSxo1wDm70_rcYrtSaBHLHx0IeEx0hVKv7kwYUXH_txgIDZELUJHpGp5ZZuL28AK781OvtQ9kGT3Bsd7JZgQkXpvjuWN7JmBGogFxxh168MPAYRbjRdd6Qup5QYp3B4sfiEQha_4pprO0WcsS3AI6vZ-HL7vct99jSHgZ3N-uLYFDfWJ5u3FAKzn8yJt0LFfOiTT6TPx3IMDJE9FvlOFR0B356aiCv-WByfH1WoIXaPIUEnmQY_tI7xYe6SHWGkryYJsoORSu4" alt="Ahmed" />
+            <div>
+              <p class="font-medium">أحمد</p>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">أكتوبر 2023</p>
+            </div>
+          </div>
+          <div class="flex gap-0.5 text-secondary mb-2">
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+          </div>
+          <p class="text-text-light dark:text-text-dark">أفضل كبسة جربتها في حياتي! الدجاج طري جداً والبهارات مميزة. أنصح بتجربتها!</p>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div class="flex items-center gap-3 mb-3">
+            <img class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBogQRn-pplc8GXn-CZDo92vGzaDBw3s0jymM9EnEfgHZ-jS-evUNRAr0xk7DNP_Lssy4rRjaCgUoWopycWUjQJWqMEQ1ZOEfaC973j9gf5iHK8IAuhQTttzHdHpQgYcffwGlOgFtRHN-mNtlQIoVzSpxM27tRohV55XR-pUuAYpE85tz1VWc-BAg_1Dm5dxdBOarPajE4Xx19AxXmV8LW1IX1HBAjjmbIxqnhhlCT4Oj_gIuC4QR5i0RPMvwrJrTj_9wCBxfoIZd4" alt="Fatima" />
+            <div>
+              <p class="font-medium">فاطمة</p>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">سبتمبر 2023</p>
+            </div>
+          </div>
+          <div class="flex gap-0.5 text-secondary mb-2">
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+          </div>
+          <p class="text-text-light dark:text-text-dark">أطباق لذيذة ونكهة أصيلة! أنصح بها لكل محبي المأكولات العربية.</p>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div class="flex items-center gap-3 mb-3">
+            <img class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYR1MX7VY8rN9ockwiMihMiYkUxpy5FAkyJMauxqtYb3tW8AKCe2hHEankR4xOQhc00sH4LzyfksIxUTq9BQBU0Us0T6tR07GseJuRImME-CGfvxSaE9TMFm2uki_EvqTVyEWfX-9iBpR-7HmO00UNiA2yY88KlHz1Of4LKfhQ29kH-Wj2vSKR2kO-ogoDTkXv3TCmHTG9VXGnvcqvGNLNsI8puXZtkwd_wENSAf_KGpTSp5i6yK25Io02qYASSuIxv7ITA92MXdc" alt="Hassan" />
+            <div>
+              <p class="font-medium">حسن</p>
+              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">أغسطس 2023</p>
+            </div>
+          </div>
+          <div class="flex gap-0.5 text-secondary mb-2">
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined text-gray-400">star_outline</span>
+          </div>
+          <p class="text-text-light dark:text-text-dark">الأكل رائع والخدمة ممتازة. الكمية كبيرة والسعر مناسب جداً.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 sm:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl sm:text-4xl font-bold font-display mb-12 text-text-light dark:text-text-dark">تواصل معنا</h2>
+      <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800/60 p-8 rounded-xl shadow-lg text-center">
+        <p class="text-lg text-text-muted-light dark:text-text-muted-dark mb-6">نحن هنا لخدمتكم!</p>
+        <div class="mb-6">
+          <p class="font-bold text-text-light dark:text-text-dark">ساعات العمل:</p>
+          <p class="text-text-light dark:text-text-dark">يومياً من 12:00 ظهراً – 12:00 صباحاً</p>
+        </div>
+        <div class="flex justify-center space-x-6 space-x-reverse">
+          <a href="#" class="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-secondary transition-colors">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+          </a>
+          <a href="#" class="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-secondary transition-colors">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
+          </a>
+          <a href="#" class="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-secondary transition-colors">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm6.406-11.845a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 dark:bg-background-dark/80 py-6">
+    <div class="container mx-auto px-4 text-center text-text-muted-light dark:text-text-muted-dark">
+      <p>© 2024 مرتاح دجاج. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/201234567890" target="_blank"
+    class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all transform hover:scale-110 z-50">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01s-.521.074-.792.372c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path>
+    </svg>
+  </a>
+
+  <script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
