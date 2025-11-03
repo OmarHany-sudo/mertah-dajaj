@@ -82,15 +82,21 @@
               </div>
               <div class="space-y-6">
                 <!-- Meal Quantity -->
-                <div>
-                  <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="meal-quantity">عدد الوجبات</label>
-                  <select class="form-select block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 h-14 p-3.5 text-base focus:ring-primary focus:border-primary" id="meal-quantity" x-model="formData.mealQuantity">
-                    <!-- إنشاء خيارات من 1 إلى 10 -->
-                    <template x-for="i in 10" :key="i">
-                      <option :value="i" x-text="i"></option>
-                    </template>
-                  </select>
-                </div>
+                <div class="relative">
+  <select
+    class="block appearance-none w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 pr-10 text-base focus:ring-primary focus:border-primary"
+    id="meal-quantity"
+    x-model="formData.mealQuantity"
+  >
+    <template x-for="i in 10" :key="i">
+      <option :value="i" x-text="i"></option>
+    </template>
+  </select>
+  <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+  </svg>
+</div>
+
 
                 <!-- Add-ons (بدون "زيادة تومية") -->
                 <div>
