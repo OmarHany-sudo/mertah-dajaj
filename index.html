@@ -238,62 +238,74 @@
   </div>
 </section>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const reviewForm = document.getElementById("reviewForm");
-    const reviewsList = document.getElementById("reviewsList");
+<!-- Firebase -->
+<script type="module">
+  // استدعاء إعدادات Firebase من الملف اللي انت عملته
+  import { db } from './firebase-config.js';
+  import { collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    // تحميل التقييمات من localStorage
-    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  const reviewForm = document.getElementById("reviewForm");
+  const reviewsList = document.getElementById("reviewsList");
+  const reviewsCollection = collection(db, "reviews"); // اسم الـ collection
 
-    // عرض التقييمات
-    function displayReviews() {
-      reviewsList.innerHTML = "<h3 class='text-2xl font-semibold mb-4'>التقييمات الأخيرة 📢</h3>";
-      if (reviews.length === 0) {
-        reviewsList.innerHTML += "<p class='text-gray-500'>لسه مفيش تقييمات 😅</p>";
-        return;
-      }
+  // عرض التقييمات من Firestore
+  async function displayReviews() {
+    reviewsList.innerHTML = "<h3 class='text-2xl font-semibold mb-4'>التقييمات الأخيرة 📢</h3>";
 
-      reviews.forEach(r => {
-        reviewsList.innerHTML += `
-          <div class="bg-white p-5 rounded-xl shadow-md">
-            <div class="flex justify-between items-center mb-2">
-              <span class="font-bold text-yellow-600">${r.name}</span>
-              <span>${"⭐".repeat(r.rating)}</span>
-            </div>
-            ${r.comment ? `<p class="text-gray-700">${r.comment}</p>` : ""}
-          </div>
-        `;
-      });
+    const q = query(reviewsCollection, orderBy("timestamp", "desc"));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      reviewsList.innerHTML += "<p class='text-gray-500'>لسه مفيش تقييمات 😅</p>";
+      return;
     }
 
-    // أول ما الصفحة تفتح
-    displayReviews();
+    querySnapshot.forEach((doc) => {
+      const r = doc.data();
+      reviewsList.innerHTML += `
+        <div class="bg-white p-5 rounded-xl shadow-md">
+          <div class="flex justify-between items-center mb-2">
+            <span class="font-bold text-yellow-600">${r.name}</span>
+            <span>${"⭐".repeat(r.rating)}</span>
+          </div>
+          ${r.comment ? `<p class="text-gray-700">${r.comment}</p>` : ""}
+        </div>
+      `;
+    });
+  }
 
-    // لما المستخدم يضيف تقييم
-    reviewForm.addEventListener("submit", e => {
-      e.preventDefault();
+  // أول ما الصفحة تفتح
+  displayReviews();
 
-      const name = document.getElementById("name").value.trim();
-      const rating = document.getElementById("rating").value;
-      const comment = document.getElementById("comment").value.trim();
+  // إضافة تقييم جديد
+  reviewForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      if (!name || !rating) {
-        alert("من فضلك اكتب الاسم واختار تقييم ⭐");
-        return;
-      }
+    const name = document.getElementById("name").value.trim();
+    const rating = document.getElementById("rating").value;
+    const comment = document.getElementById("comment").value.trim();
 
-      const newReview = { name, rating: parseInt(rating), comment };
-      reviews.push(newReview);
-      localStorage.setItem("reviews", JSON.stringify(reviews));
+    if (!name || !rating) {
+      alert("من فضلك اكتب الاسم واختار تقييم ⭐");
+      return;
+    }
+
+    try {
+      await addDoc(reviewsCollection, {
+        name,
+        rating: parseInt(rating),
+        comment,
+        timestamp: new Date()
+      });
 
       reviewForm.reset();
       displayReviews();
-    });
+    } catch (error) {
+      console.error("خطأ في إضافة التقييم:", error);
+      alert("حصل خطأ أثناء إضافة التقييم 😢");
+    }
   });
 </script>
-
-
 
 
   <!-- Contact Section -->
