@@ -99,18 +99,18 @@
 
 
                 <!-- Add-ons (بدون "زيادة تومية") -->
-                <div>
-                  <p class="text-base font-medium text-gray-800 dark:text-gray-200 pb-2">الإضافات</p>
-                  <div class="space-y-3">
-                    <!-- التحديث: حذف "زيادة تومية" -->
-                    <template x-for="addon in addons" :key="addon.id">
-                      <label class="flex items-center justify-between gap-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
-                        <span class="text-base text-gray-800 dark:text-gray-200" x-text="addon.name"></span>
-                        <input :value="addon.name" class="form-checkbox h-5 w-5 rounded border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0" type="checkbox" x-model="formData.addons" />
-                      </label>
-                    </template>
-                  </div>
-                </div>
+               <div>
+  <p class="text-base font-medium text-gray-800 dark:text-gray-200 pb-2">الإضافات</p>
+  <div class="space-y-3">
+    <!-- التحديث: إضافة السعر لكل خيار -->
+    <template x-for="addon in addons" :key="addon.id">
+      <label class="flex items-center justify-between gap-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+        <span class="text-base text-gray-800 dark:text-gray-200" x-text="`${addon.name} - ${addon.price} جنيه`"></span>
+        <input :value="addon.name" class="form-checkbox h-5 w-5 rounded border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0" type="checkbox" x-model="formData.addons" />
+      </label>
+    </template>
+  </div>
+</div>
 
                 <!-- Contact Information -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -190,11 +190,14 @@
         },
         isCatering: false,
         // ✅ تم حذف "زيادة تومية"
-        addons: [
-          { id: 'rice', name: 'زيادة رز' },
-          { id: 'daqoos', name: 'زيادة دقوس' },
-          { id: 'honey', name: 'زيادة عسل' }
-        ],
+      addons: [
+  { id: 'rice_pudding', name: 'رز بلبن', price: 20 },
+  { id: 'daqoos', name: 'دقوس', price: 20 },
+  { id: 'honey', name: 'عسل', price: 20 },
+  { id: 'yogurt', name: 'رايب', price: 20 },
+  { id: 'small_water', name: 'زجاجه مياه صغيره', price: 10 },
+  { id: 'large_water', name: 'زجاجه مياه كبيره', price: 15 }
+],
         submitOrder() {
           let message = `*طلب جديد من مرتاح دجاج* 🍗\n\n`;
           message += `*الاسم:* ${this.formData.name}\n`;
