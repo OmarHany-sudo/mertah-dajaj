@@ -190,173 +190,109 @@
   </section>
 
 <!-- Reviews Section -->
-<section id="reviews" class="py-16 sm:py-24 bg-gray-50 dark:bg-background-dark/30">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-center text-3xl sm:text-4xl font-bold font-display mb-12 text-text-light dark:text-text-dark">
-      آراء عملائنا ❤️
-    </h2>
+<section id="reviews" class="py-16 bg-gray-50">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">آراء العملاء ⭐</h2>
 
     <!-- Add Review Form -->
-    <div class="max-w-xl mx-auto mb-12 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-      <h3 class="text-xl font-bold mb-4 text-center text-text-light dark:text-text-dark">شاركنا رأيك 👇</h3>
-
+    <div class="bg-white shadow-md rounded-2xl p-6 mb-10">
+      <h3 class="text-xl font-semibold mb-4">شاركنا رأيك 💬</h3>
       <form id="reviewForm" class="space-y-4">
-        <input
-          type="text"
-          id="name"
-          placeholder="اسمك"
-          required
-          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:outline-none dark:bg-gray-700 dark:text-white"
-        />
-
-        <div class="flex justify-center gap-1 text-3xl text-gray-400 cursor-pointer" id="stars">
-          <span data-star="1" class="material-symbols-outlined">star</span>
-          <span data-star="2" class="material-symbols-outlined">star</span>
-          <span data-star="3" class="material-symbols-outlined">star</span>
-          <span data-star="4" class="material-symbols-outlined">star</span>
-          <span data-star="5" class="material-symbols-outlined">star</span>
+        <div>
+          <label for="name" class="block text-right text-gray-700 mb-1">الاسم</label>
+          <input id="name" type="text" required placeholder="اكتب اسمك"
+            class="w-full px-4 py-2 border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-yellow-400">
         </div>
 
-        <textarea
-          id="message"
-          rows="3"
-          placeholder="اكتب تجربتك مع مرتاح دجاج ❤️"
-          required
-          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:outline-none dark:bg-gray-700 dark:text-white"
-        ></textarea>
+        <div>
+          <label for="rating" class="block text-right text-gray-700 mb-1">التقييم</label>
+          <select id="rating" required
+            class="w-full px-4 py-2 border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            <option value="">اختار تقييمك</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+          </select>
+        </div>
 
-        <button
-          type="submit"
-          class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-secondary transition-all"
-        >
-          إرسال التقييم
+        <div>
+          <label for="comment" class="block text-right text-gray-700 mb-1">تعليق (اختياري)</label>
+          <textarea id="comment" placeholder="قولنا رأيك لو حابب 😄"
+            class="w-full px-4 py-2 border rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
+        </div>
+
+        <button type="submit"
+          class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-lg transition duration-300">
+          أضف التقييم ✅
         </button>
       </form>
     </div>
 
- <!-- Reviews Section -->
-<section id="reviews" class="py-16 bg-gray-50">
-  <div class="max-w-4xl mx-auto px-4 text-center">
-    <h2 class="text-3xl font-bold mb-6 text-gray-800">تقييمات العملاء ⭐</h2>
-
-    <!-- Reviews List -->
-    <div id="reviews-list" class="space-y-4 mb-8"></div>
-
-    <!-- Add Review Form -->
-    <div class="bg-white p-6 rounded-2xl shadow-md">
-      <h3 class="text-xl font-semibold mb-4 text-gray-700">ضيف تقييمك 👇</h3>
-      <form id="review-form" class="space-y-4">
-        <input
-          type="text"
-          id="name"
-          placeholder="اسمك"
-          class="w-full p-3 border rounded-lg focus:ring focus:ring-orange-300 outline-none"
-          required
-        />
-        <select
-          id="rating"
-          class="w-full p-3 border rounded-lg focus:ring focus:ring-orange-300 outline-none"
-          required
-        >
-          <option value="">اختار التقييم</option>
-          <option value="5">⭐⭐⭐⭐⭐</option>
-          <option value="4">⭐⭐⭐⭐</option>
-          <option value="3">⭐⭐⭐</option>
-          <option value="2">⭐⭐</option>
-          <option value="1">⭐</option>
-        </select>
-        <textarea
-          id="comment"
-          placeholder="اكتب رأيك..."
-          class="w-full p-3 border rounded-lg focus:ring focus:ring-orange-300 outline-none"
-          required
-        ></textarea>
-        <button
-          type="submit"
-          class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition-all"
-        >
-          نشر التقييم 🚀
-        </button>
-      </form>
+    <!-- Display Reviews -->
+    <div id="reviewsList" class="space-y-6 text-right">
+      <h3 class="text-2xl font-semibold mb-4">التقييمات الأخيرة 📢</h3>
+      <!-- Reviews will appear here -->
     </div>
   </div>
 </section>
 
-<!-- Firebase Reviews Script -->
-<script type="module">
-  import { db } from "./firebase.js";
-  import {
-    collection,
-    addDoc,
-    getDocs,
-    query,
-    orderBy,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const reviewForm = document.getElementById("reviewForm");
+    const reviewsList = document.getElementById("reviewsList");
 
-  const reviewForm = document.getElementById("review-form");
-  const reviewsList = document.getElementById("reviews-list");
+    // تحميل التقييمات من localStorage
+    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
-  // ✅ تحميل التقييمات
-  async function loadReviews() {
-    reviewsList.innerHTML = "<p>جاري تحميل التقييمات...</p>";
+    // عرض التقييمات
+    function displayReviews() {
+      reviewsList.innerHTML = "<h3 class='text-2xl font-semibold mb-4'>التقييمات الأخيرة 📢</h3>";
+      if (reviews.length === 0) {
+        reviewsList.innerHTML += "<p class='text-gray-500'>لسه مفيش تقييمات 😅</p>";
+        return;
+      }
 
-    const q = query(collection(db, "reviews"), orderBy("timestamp", "desc"));
-    const querySnapshot = await getDocs(q);
-
-    if (querySnapshot.empty) {
-      reviewsList.innerHTML = "<p>لسه مفيش تقييمات 😅</p>";
-      return;
-    }
-
-    reviewsList.innerHTML = "";
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      const stars = "⭐".repeat(data.rating);
-      const reviewHTML = `
-        <div class="bg-white shadow-md rounded-xl p-5 text-right">
-          <h4 class="font-semibold text-lg text-orange-600">${data.name}</h4>
-          <p class="text-yellow-500 mb-2">${stars}</p>
-          <p class="text-gray-700">${data.comment}</p>
-        </div>
-      `;
-      reviewsList.innerHTML += reviewHTML;
-    });
-  }
-
-  // ✅ إضافة تقييم جديد
-  reviewForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const rating = parseInt(document.getElementById("rating").value);
-    const comment = document.getElementById("comment").value.trim();
-
-    if (!name || !rating || !comment) {
-      alert("اكمل كل البيانات يا نجم 😅");
-      return;
-    }
-
-    try {
-      await addDoc(collection(db, "reviews"), {
-        name,
-        rating,
-        comment,
-        timestamp: serverTimestamp()
+      reviews.forEach(r => {
+        reviewsList.innerHTML += `
+          <div class="bg-white p-5 rounded-xl shadow-md">
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-bold text-yellow-600">${r.name}</span>
+              <span>${"⭐".repeat(r.rating)}</span>
+            </div>
+            ${r.comment ? `<p class="text-gray-700">${r.comment}</p>` : ""}
+          </div>
+        `;
       });
+    }
+
+    // أول ما الصفحة تفتح
+    displayReviews();
+
+    // لما المستخدم يضيف تقييم
+    reviewForm.addEventListener("submit", e => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const rating = document.getElementById("rating").value;
+      const comment = document.getElementById("comment").value.trim();
+
+      if (!name || !rating) {
+        alert("من فضلك اكتب الاسم واختار تقييم ⭐");
+        return;
+      }
+
+      const newReview = { name, rating: parseInt(rating), comment };
+      reviews.push(newReview);
+      localStorage.setItem("reviews", JSON.stringify(reviews));
 
       reviewForm.reset();
-      alert("تم نشر تقييمك بنجاح ❤️");
-      loadReviews(); // تحديث التقييمات مباشرة بعد الإضافة
-    } catch (error) {
-      console.error("Error adding review:", error);
-      alert("في مشكلة حصلت أثناء الإرسال 😢");
-    }
+      displayReviews();
+    });
   });
-
-  // تحميل التقييمات أول ما الصفحة تفتح
-  loadReviews();
 </script>
+
 
 
 
