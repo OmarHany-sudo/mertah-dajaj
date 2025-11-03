@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>اطلب الآن من مرتاح دجاج</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Noto+Sans+Arabic:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#b22222",
+            "accent": "#eab308",
+            "background-light": "#f8f6f6",
+            "background-dark": "#211111",
+          },
+          fontFamily: {
+            "display": ["Noto Sans Arabic", "Noto Serif", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Noto Sans Arabic', 'Noto Serif', sans-serif;
+    }
+
+    [x-cloak] {
+      display: none !important;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: #b22222;
+      box-shadow: 0 0 0 2px rgba(178, 34, 34, 0.2);
+      outline: none;
+    }
+
+    .form-checkbox:checked {
+      background-color: #b22222;
+      border-color: #b22222;
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden" x-data="orderForm()">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-10 py-3">
+<div class="flex items-center gap-4 text-gray-800 dark:text-white">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="m21.84 10.2-5.1-1.22L14.32 4a1.05 1.05 0 0 0-1.93 0L10 8.98l-5.1 1.22a1 1 0 0 0-.64 1.74l3.8 3.56-.94 5.22a1 1 0 0 0 1.48 1.08l4.4-2.43 4.4 2.43a1 1 0 0 0 1.48-1.08l-.94-5.22 3.8-3.56a1 1 0 0 0-.64-1.74ZM15.3 15l.6 3.2L12 16.48 8.1 18.2l.6-3.2L6.1 12.4l3.18-.76L11 8.52l1.72 3.12 3.18.76L15.3 15Z"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight">مرتاح دجاج</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-primary dark:hover:text-primary" href="#">الرئيسية</a>
+</div>
+</div>
+</header>
+<main class="flex-1 p-4 sm:p-6 lg:p-8">
+<div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 sm:p-8 space-y-8">
+<div class="text-center">
+<p class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">اطلب الآن من مرتاح دجاج</p>
+</div>
+<div class="space-y-6">
+<!-- Meal Quantity -->
+<div>
+<label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="meal-quantity">عدد الوجبات</label>
+<select class="form-select block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 h-14 p-3.5 text-base focus:ring-primary focus:border-primary" id="meal-quantity" x-model="formData.mealQuantity">
+<option :value="i" x-text="i"></option>
+</select>
+</div>
+<!-- Add-ons -->
+<div>
+<p class="text-base font-medium text-gray-800 dark:text-gray-200 pb-2">الإضافات</p>
+<div class="space-y-3">
+<template :key="addon.id" x-for="addon in addons">
+<label class="flex items-center justify-between gap-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
+<span class="text-base text-gray-800 dark:text-gray-200" x-text="addon.name"></span>
+<input :value="addon.name" class="form-checkbox h-5 w-5 rounded border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0" type="checkbox" x-model="formData.addons"/>
+</label>
+</template>
+</div>
+</div>
+<!-- Contact Information -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="name">الاسم</label>
+<input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 h-14 p-3.5 text-base focus:ring-primary focus:border-primary" id="name" placeholder="ادخل اسمك" type="text" x-model="formData.name"/>
+</div>
+<div>
+<label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="mobile">رقم الموبايل</label>
+<input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 h-14 p-3.5 text-base focus:ring-primary focus:border-primary" id="mobile" placeholder="مثال: 05xxxxxxx" type="tel" x-model="formData.mobile"/>
+</div>
+</div>
+<!-- Delivery Details -->
+<div>
+<label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="address">العنوان بالتفصيل</label>
+<textarea class="form-textarea block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-3.5 text-base focus:ring-primary focus:border-primary" id="address" placeholder="الحي، الشارع، رقم المبنى..." rows="3" x-model="formData.address"></textarea>
+</div>
+<div>
+<label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="notes">ملاحظات إضافية</label>
+<textarea class="form-textarea block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-3.5 text-base focus:ring-primary focus:border-primary" id="notes" placeholder="أي طلبات خاصة؟" rows="2" x-model="formData.notes"></textarea>
+</div>
+<!-- Catering Request -->
+<div class="border-t border-gray-200 dark:border-gray-700 pt-6 space-y-4">
+<label class="flex items-center gap-x-3 cursor-pointer">
+<input class="form-checkbox h-6 w-6 rounded border-gray-300 dark:border-gray-600 text-accent focus:ring-accent checked:bg-accent checked:border-accent" type="checkbox" x-model="isCatering"/>
+<span class="text-lg font-bold text-gray-800 dark:text-gray-200">طلب عزومة 🍗</span>
+</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2" x-cloak="" x-show="isCatering" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 translate-y-0" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0 -translate-y-2" x-transition:leave-start="opacity-100 translate-y-0">
+<div>
+<label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="people">عدد الأشخاص</label>
+<input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 focus:ring-primary focus:border-primary" id="people" placeholder="15" type="number" x-model="formData.catering.people"/>
+</div>
+<div>
+<label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="date">التاريخ</label>
+<input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 focus:ring-primary focus:border-primary" id="date" type="date" x-model="formData.catering.date"/>
+</div>
+<div>
+<label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="time">الساعة</label>
+<input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 focus:ring-primary focus:border-primary" id="time" type="time" x-model="formData.catering.time"/>
+</div>
+</div>
+</div>
+<!-- CTA Button -->
+<div class="pt-4">
+<button @click="submitOrder" class="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-4 bg-primary text-white text-lg font-bold leading-normal tracking-wide shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-4 focus:ring-primary/40 transition-all duration-200">
+<span class="truncate">أكد الطلب على واتساب 💬</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+<script defer="" src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script>
+    function orderForm() {
+      return {
+        formData: {
+          mealQuantity: 1,
+          addons: [],
+          name: '',
+          mobile: '',
+          address: '',
+          notes: '',
+          catering: {
+            people: '',
+            date: '',
+            time: ''
+          }
+        },
+        isCatering: false,
+        addons: [{
+          id: 'rice',
+          name: 'زيادة رز'
+        }, {
+          id: 'daqoos',
+          name: 'زيادة دقوس'
+        }, {
+          id: 'garlic',
+          name: 'زيادة تومية'
+        }, {
+          id: 'honey',
+          name: 'زيادة عسل'
+        }],
+        submitOrder() {
+          let message = `*طلب جديد من مرتاح دجاج* 🍗\n\n`;
+          message += `*الاسم:* ${this.formData.name}\n`;
+          message += `*رقم الموبايل:* ${this.formData.mobile}\n`;
+          message += `*العنوان:* ${this.formData.address}\n\n`;
+
+          if (this.isCatering) {
+            message += `*-- طلب عزومة --*\n`;
+            message += `*عدد الأشخاص:* ${this.formData.catering.people}\n`;
+            message += `*التاريخ:* ${this.formData.catering.date}\n`;
+            message += `*الساعة:* ${this.formData.catering.time}\n\n`;
+          } else {
+            message += `*-- طلب عادي --*\n`;
+            message += `*عدد الوجبات:* ${this.formData.mealQuantity}\n`;
+          }
+
+
+          if (this.formData.addons.length > 0) {
+            message += `*الإضافات:*\n- ${this.formData.addons.join('\n- ')}\n\n`;
+          }
+
+          if (this.formData.notes) {
+            message += `*ملاحظات:* ${this.formData.notes}\n`;
+          }
+
+          message += `---------------------\nشكراً لاختياركم مرتاح دجاج!`;
+
+          const whatsappUrl = `https://api.whatsapp.com/send?phone=YOUR_PHONE_NUMBER&text=${encodeURIComponent(message)}`;
+          // Replace YOUR_PHONE_NUMBER with the restaurant's WhatsApp number including country code (e.g., 9665xxxxxxxx)
+          window.open(whatsappUrl, '_blank');
+        }
+      }
+    }
+  </script>
+</body></html>
