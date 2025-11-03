@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mertahchicken.com/sitemap.xml
+Sitemap: https://mirtah-dajaj.netlify.app/sitemap.xml
