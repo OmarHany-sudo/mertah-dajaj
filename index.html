@@ -189,70 +189,135 @@
     </div>
   </section>
 
-  <!-- Reviews Section -->
-  <section id="reviews" class="py-16 sm:py-24 bg-gray-50 dark:bg-background-dark/30">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-center text-3xl sm:text-4xl font-bold font-display mb-12 text-text-light dark:text-text-dark">آراء عملائنا</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Review 1 -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
-          <div class="flex items-center gap-3 mb-3">
-            <img class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf7oSxo1wDm70_rcYrtSaBHLHx0IeEx0hVKv7kwYUXH_txgIDZELUJHpGp5ZZuL28AK781OvtQ9kGT3Bsd7JZgQkXpvjuWN7JmBGogFxxh168MPAYRbjRdd6Qup5QYp3B4sfiEQha_4pprO0WcsS3AI6vZ-HL7vct99jSHgZ3N-uLYFDfWJ5u3FAKzn8yJt0LFfOiTT6TPx3IMDJE9FvlOFR0B356aiCv-WByfH1WoIXaPIUEnmQY_tI7xYe6SHWGkryYJsoORSu4" alt="أحمد – عميل مرتاح دجاج" loading="lazy" />
-            <div>
-              <p class="font-medium">أحمد</p>
-              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">أكتوبر 2023</p>
-            </div>
-          </div>
-          <div class="flex gap-0.5 text-secondary mb-2">
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-          </div>
-          <p class="text-text-light dark:text-text-dark">أفضل كبسة جربتها في حياتي! الدجاج طري جداً والبهارات مميزة. أنصح بتجربتها!</p>
+<!-- Reviews Section -->
+<section id="reviews" class="py-16 sm:py-24 bg-gray-50 dark:bg-background-dark/30">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-center text-3xl sm:text-4xl font-bold font-display mb-12 text-text-light dark:text-text-dark">
+      آراء عملائنا ❤️
+    </h2>
+
+    <!-- Add Review Form -->
+    <div class="max-w-xl mx-auto mb-12 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+      <h3 class="text-xl font-bold mb-4 text-center text-text-light dark:text-text-dark">شاركنا رأيك 👇</h3>
+
+      <form id="reviewForm" class="space-y-4">
+        <input
+          type="text"
+          id="name"
+          placeholder="اسمك"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:outline-none dark:bg-gray-700 dark:text-white"
+        />
+
+        <div class="flex justify-center gap-1 text-3xl text-gray-400 cursor-pointer" id="stars">
+          <span data-star="1" class="material-symbols-outlined">star</span>
+          <span data-star="2" class="material-symbols-outlined">star</span>
+          <span data-star="3" class="material-symbols-outlined">star</span>
+          <span data-star="4" class="material-symbols-outlined">star</span>
+          <span data-star="5" class="material-symbols-outlined">star</span>
         </div>
 
-        <!-- Review 2 -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
-          <div class="flex items-center gap-3 mb-3">
-            <img class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBogQRn-pplc8GXn-CZDo92vGzaDBw3s0jymM9EnEfgHZ-jS-evUNRAr0xk7DNP_Lssy4rRjaCgUoWopycWUjQJWqMEQ1ZOEfaC973j9gf5iHK8IAuhQTttzHdHpQgYcffwGlOgFtRHN-mNtlQIoVzSpxM27tRohV55XR-pUuAYpE85tz1VWc-BAg_1Dm5dxdBOarPajE4Xx19AxXmV8LW1IX1HBAjjmbIxqnhhlCT4Oj_gIuC4QR5i0RPMvwrJrTj_9wCBxfoIZd4" alt="فاطمة – عميلة مرتاح دجاج" loading="lazy" />
-            <div>
-              <p class="font-medium">فاطمة</p>
-              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">سبتمبر 2023</p>
-            </div>
-          </div>
-          <div class="flex gap-0.5 text-secondary mb-2">
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-          </div>
-          <p class="text-text-light dark:text-text-dark">أطباق لذيذة ونكهة أصيلة! أنصح بها لكل محبي المأكولات العربية.</p>
-        </div>
+        <textarea
+          id="message"
+          rows="3"
+          placeholder="اكتب تجربتك مع مرتاح دجاج ❤️"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:outline-none dark:bg-gray-700 dark:text-white"
+        ></textarea>
 
-        <!-- Review 3 -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
-          <div class="flex items-center gap-3 mb-3">
-            <img class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYR1MX7VY8rN9ockwiMihMiYkUxpy5FAkyJMauxqtYb3tW8AKCe2hHEankR4xOQhc00sH4LzyfksIxUTq9BQBU0Us0T6tR07GseJuRImME-CGfvxSaE9TMFm2uki_EvqTVyEWfX-9iBpR-7HmO00UNiA2yY88KlHz1Of4LKfhQ29kH-Wj2vSKR2kO-ogoDTkXv3TCmHTG9VXGnvcqvGNLNsI8puXZtkwd_wENSAf_KGpTSp5i6yK25Io02qYASSuIxv7ITA92MXdc" alt="حسن – عميل مرتاح دجاج" loading="lazy" />
-            <div>
-              <p class="font-medium">حسن</p>
-              <p class="text-sm text-text-muted-light dark:text-text-muted-dark">أغسطس 2023</p>
-            </div>
-          </div>
-          <div class="flex gap-0.5 text-secondary mb-2">
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined text-gray-400">star_outline</span>
-          </div>
-          <p class="text-text-light dark:text-text-dark">الأكل رائع والخدمة ممتازة. الكمية كبيرة والسعر مناسب جداً.</p>
-        </div>
-      </div>
+        <button
+          type="submit"
+          class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-secondary transition-all"
+        >
+          إرسال التقييم
+        </button>
+      </form>
     </div>
-  </section>
+
+    <!-- Reviews List -->
+    <div id="reviewsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("reviewForm");
+  const stars = document.querySelectorAll("#stars span");
+  const reviewsList = document.getElementById("reviewsList");
+
+  let selectedRating = 0;
+
+  // تفعيل النجوم ⭐
+  stars.forEach((star) => {
+    star.addEventListener("click", () => {
+      selectedRating = parseInt(star.getAttribute("data-star"));
+      stars.forEach((s, i) => {
+        s.classList.toggle("text-yellow-400", i < selectedRating);
+        s.classList.toggle("text-gray-400", i >= selectedRating);
+      });
+    });
+  });
+
+  // تحميل التقييمات من LocalStorage
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  renderReviews();
+
+  // إرسال التقييم
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const message = document.getElementById("message").value;
+
+    if (selectedRating === 0) {
+      alert("من فضلك اختر عدد النجوم 🌟");
+      return;
+    }
+
+    const review = {
+      name,
+      message,
+      rating: selectedRating,
+      date: new Date().toLocaleDateString("ar-EG"),
+    };
+
+    reviews.push(review);
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+
+    form.reset();
+    selectedRating = 0;
+    stars.forEach((s) => s.classList.remove("text-yellow-400"));
+    renderReviews();
+  });
+
+  // عرض التقييمات
+  function renderReviews() {
+    reviewsList.innerHTML = "";
+    reviews
+      .slice()
+      .reverse()
+      .forEach((r) => {
+        const starsHTML = Array.from({ length: 5 })
+          .map((_, i) =>
+            i < r.rating
+              ? `<span class="material-symbols-outlined text-yellow-400">star</span>`
+              : `<span class="material-symbols-outlined text-gray-400">star</span>`
+          )
+          .join("");
+
+        const div = document.createElement("div");
+        div.className = "bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md";
+        div.innerHTML = `
+          <div class="flex items-center justify-between mb-3">
+            <p class="font-medium">${r.name}</p>
+            <p class="text-sm text-text-muted-light dark:text-text-muted-dark">${r.date}</p>
+          </div>
+          <div class="flex gap-0.5 mb-2">${starsHTML}</div>
+          <p class="text-text-light dark:text-text-dark">${r.message}</p>
+        `;
+        reviewsList.appendChild(div);
+      });
+  }
+</script>
+
 
   <!-- Contact Section -->
   <section id="contact" class="py-16 sm:py-24">
