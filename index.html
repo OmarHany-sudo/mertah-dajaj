@@ -238,46 +238,62 @@
   </div>
 </section>
 
-<!-- Firebase -->
+<!-- ✅ Firebase & Reviews Section -->
 <script type="module">
-  // استدعاء إعدادات Firebase من الملف اللي انت عملته
-<script type="module" src="./firebase.js"></script>  
-  import { collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  // استدعاء Firebase من الملف الخارجي
+  import { db } from "./firebase.js";
+  import {
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+    serverTimestamp,
+  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
+  // العناصر
   const reviewForm = document.getElementById("reviewForm");
   const reviewsList = document.getElementById("reviewsList");
-  const reviewsCollection = collection(db, "reviews"); // اسم الـ collection
+  const reviewsCollection = collection(db, "reviews");
 
-  // عرض التقييمات من Firestore
+  // ✅ تحميل التقييمات من Firestore
   async function displayReviews() {
-    reviewsList.innerHTML = "<h3 class='text-2xl font-semibold mb-4'>التقييمات الأخيرة 📢</h3>";
+    reviewsList.innerHTML = "<p>جاري تحميل التقييمات...</p>";
 
-    const q = query(reviewsCollection, orderBy("timestamp", "desc"));
-    const querySnapshot = await getDocs(q);
+    try {
+      const q = query(reviewsCollection, orderBy("timestamp", "desc"));
+      const querySnapshot = await getDocs(q);
 
-    if (querySnapshot.empty) {
-      reviewsList.innerHTML += "<p class='text-gray-500'>لسه مفيش تقييمات 😅</p>";
-      return;
-    }
+      reviewsList.innerHTML =
+        "<h3 class='text-2xl font-semibold mb-4 text-center'>آراء العملاء ⭐</h3>";
 
-    querySnapshot.forEach((doc) => {
-      const r = doc.data();
-      reviewsList.innerHTML += `
-        <div class="bg-white p-5 rounded-xl shadow-md">
-          <div class="flex justify-between items-center mb-2">
-            <span class="font-bold text-yellow-600">${r.name}</span>
-            <span>${"⭐".repeat(r.rating)}</span>
+      if (querySnapshot.empty) {
+        reviewsList.innerHTML +=
+          "<p class='text-gray-500 text-center'>لسه مفيش تقييمات 😅</p>";
+        return;
+      }
+
+      querySnapshot.forEach((doc) => {
+        const r = doc.data();
+        const stars = "⭐".repeat(r.rating);
+        reviewsList.innerHTML += `
+          <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-md mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-bold text-yellow-600">${r.name}</span>
+              <span>${stars}</span>
+            </div>
+            ${r.comment ? `<p class="text-gray-700 dark:text-gray-300">${r.comment}</p>` : ""}
           </div>
-          ${r.comment ? `<p class="text-gray-700">${r.comment}</p>` : ""}
-        </div>
-      `;
-    });
+        `;
+      });
+    } catch (error) {
+      console.error("Error loading reviews:", error);
+      reviewsList.innerHTML =
+        "<p class='text-red-500'>حصل خطأ أثناء تحميل التقييمات 😢</p>";
+    }
   }
 
-  // أول ما الصفحة تفتح
-  displayReviews();
-
-  // إضافة تقييم جديد
+  // ✅ إضافة تقييم جديد
   reviewForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -294,19 +310,21 @@
       await addDoc(reviewsCollection, {
         name,
         rating: parseInt(rating),
-        comment,
-        timestamp: new Date()
+        comment: comment || "",
+        timestamp: serverTimestamp(),
       });
 
       reviewForm.reset();
-      displayReviews();
+      displayReviews(); // تحديث فوري
     } catch (error) {
-      console.error("خطأ في إضافة التقييم:", error);
+      console.error("Error adding review:", error);
       alert("حصل خطأ أثناء إضافة التقييم 😢");
     }
   });
-</script>
 
+  // ✅ تحميل التقييمات أول ما الصفحة تفتح
+  displayReviews();
+</script>
 
   <!-- Contact Section -->
   <section id="contact" class="py-16 sm:py-24">
