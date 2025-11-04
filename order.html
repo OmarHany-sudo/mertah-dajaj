@@ -241,60 +241,72 @@
         addonQuantities: quantities,
 
         submitOrder() {
-          let message = `*طلب جديد من مرتاح دجاج* 🍗\n\n`;
-          message += `*الاسم:* ${this.formData.name}\n`;
-          message += `*رقم الموبايل:* ${this.formData.mobile}\n`;
-          message += `*العنوان:* ${this.formData.address}\n\n`;
+  // التحقق من الحقول المطلوبة
+  if (!this.formData.name.trim()) {
+    alert("الاسم مطلوب");
+    return;
+  }
+  if (!this.formData.mobile.trim()) {
+    alert("رقم الموبايل مطلوب");
+    return;
+  }
+  if (!this.formData.address.trim()) {
+    alert("العنوان مطلوب");
+    return;
+  }
 
-          if (this.activeTab === 'catering') {
-            message += `*-- طلب عزومة --*\n`;
-            message += `*عدد الأشخاص:* ${this.formData.catering.people}\n`;
-            message += `*التاريخ:* ${this.formData.catering.date}\n`;
-            message += `*الساعة:* ${this.formData.catering.time}\n\n`;
-          } else {
-            message += `*-- طلب عادي --*\n`;
-            message += `*عدد الوجبات:* ${this.formData.mealQuantity}\n`;
-          }
+  let message = `*طلب جديد من مرتاح دجاج* 🍗\n\n`;
+  message += `*الاسم:* ${this.formData.name}\n`;
+  message += `*رقم الموبايل:* ${this.formData.mobile}\n`;
+  message += `*العنوان:* ${this.formData.address}\n\n`;
 
-          // جمع الإضافات المختارة (الكمية > 0)
-          const selectedAddons = [];
-          this.addons.forEach(addon => {
-            const qty = this.addonQuantities[addon.id];
-            if (qty > 0) {
-              selectedAddons.push(`${addon.name} × ${qty}`);
-            }
-          });
-          if (selectedAddons.length > 0) {
-            message += `*الإضافات:*\n- ${selectedAddons.join('\n- ')}\n\n`;
-          }
+  if (this.activeTab === 'catering') {
+    message += `*-- طلب عزومة --*\n`;
+    message += `*عدد الأشخاص:* ${this.formData.catering.people}\n`;
+    message += `*التاريخ:* ${this.formData.catering.date}\n`;
+    message += `*الساعة:* ${this.formData.catering.time}\n\n`;
+  } else {
+    message += `*-- طلب عادي --*\n`;
+    message += `*عدد الوجبات:* ${this.formData.mealQuantity}\n`;
+  }
 
-          if (this.formData.notes) {
-            message += `*ملاحظات:* ${this.formData.notes}\n`;
-          }
-
-          message += `---------------------\nشكراً لاختياركم مرتاح دجاج`;
-
-          const phone = "201030380101";
-          const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
-          window.open(whatsappUrl, '_blank');
-
-          // ✅ تصفير جميع الحقول بعد الإرسال
-          this.formData = {
-            mealQuantity: 1,
-            name: '',
-            mobile: '',
-            address: '',
-            notes: '',
-            catering: { people: '', date: '', time: '' }
-          };
-          this.activeTab = 'regular';
-          // تصفير كميات الإضافات
-          const resetQuantities = {};
-          this.addons.forEach(addon => resetQuantities[addon.id] = 0);
-          this.addonQuantities = resetQuantities;
-        }
-      }
+  // جمع الإضافات المختارة (الكمية > 0)
+  const selectedAddons = [];
+  this.addons.forEach(addon => {
+    const qty = this.addonQuantities[addon.id];
+    if (qty > 0) {
+      selectedAddons.push(`${addon.name} × ${qty}`);
     }
+  });
+  if (selectedAddons.length > 0) {
+    message += `*الإضافات:*\n- ${selectedAddons.join('\n- ')}\n\n`;
+  }
+
+  if (this.formData.notes) {
+    message += `*ملاحظات:* ${this.formData.notes}\n`;
+  }
+
+  message += `---------------------\nشكراً لاختياركم مرتاح دجاج`;
+
+  const phone = "201030380101";
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+  window.open(whatsappUrl, '_blank');
+
+  // ✅ تصفير جميع الحقول بعد الإرسال
+  this.formData = {
+    mealQuantity: 1,
+    name: '',
+    mobile: '',
+    address: '',
+    notes: '',
+    catering: { people: '', date: '', time: '' }
+  };
+  this.activeTab = 'regular';
+  // تصفير كميات الإضافات
+  const resetQuantities = {};
+  this.addons.forEach(addon => resetQuantities[addon.id] = 0);
+  this.addonQuantities = resetQuantities;
+}
   </script>
 </body>
 </html>
