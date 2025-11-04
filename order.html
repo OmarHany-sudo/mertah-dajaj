@@ -80,37 +80,60 @@
               <div class="text-center">
                 <p class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">اطلب الآن من مرتاح دجاج</p>
               </div>
+
+              <!-- التبويبات -->
+              <div class="flex justify-center gap-4 mb-6">
+                <button
+                  @click="activeTab = 'regular'"
+                  class="px-6 py-2 font-bold rounded-lg transition-colors"
+                  :class="activeTab === 'regular' ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'"
+                >
+                  طلب عادي
+                </button>
+                <button
+                  @click="activeTab = 'catering'"
+                  class="px-6 py-2 font-bold rounded-lg transition-colors"
+                  :class="activeTab === 'catering' ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'"
+                >
+                  عزومة
+                </button>
+              </div>
+
+              <!-- النموذج -->
               <div class="space-y-6">
                 <!-- Meal Quantity -->
                 <div class="relative">
-  <select
-    class="block appearance-none w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 pr-10 text-base focus:ring-primary focus:border-primary"
-    id="meal-quantity"
-    x-model="formData.mealQuantity"
-  >
-    <template x-for="i in 10" :key="i">
-      <option :value="i" x-text="i"></option>
-    </template>
-  </select>
-  <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-  </svg>
-</div>
+                  <select
+                    class="block appearance-none w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 pr-10 text-base focus:ring-primary focus:border-primary"
+                    id="meal-quantity"
+                    x-model="formData.mealQuantity"
+                  >
+                    <template x-for="i in 10" :key="i">
+                      <option :value="i" x-text="i"></option>
+                    </template>
+                  </select>
+                  <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
 
-
-                <!-- Add-ons (بدون "زيادة تومية") -->
-               <div>
-  <p class="text-base font-medium text-gray-800 dark:text-gray-200 pb-2">الإضافات</p>
-  <div class="space-y-3">
-    <!-- التحديث: إضافة السعر لكل خيار -->
-    <template x-for="addon in addons" :key="addon.id">
-      <label class="flex items-center justify-between gap-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20">
-        <span class="text-base text-gray-800 dark:text-gray-200" x-text="`${addon.name} - ${addon.price} جنيه`"></span>
-        <input :value="addon.name" class="form-checkbox h-5 w-5 rounded border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0" type="checkbox" x-model="formData.addons" />
-      </label>
-    </template>
-  </div>
-</div>
+                <!-- Add-ons with quantity -->
+                <div>
+                  <p class="text-base font-medium text-gray-800 dark:text-gray-200 pb-2">الإضافات</p>
+                  <div class="space-y-3">
+                    <template x-for="addon in addons" :key="addon.id">
+                      <div class="flex items-center justify-between gap-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <span class="text-base text-gray-800 dark:text-gray-200" x-text="`${addon.name} - ${addon.price} جنيه`"></span>
+                        <input
+                          type="number"
+                          min="0"
+                          class="form-input w-20 text-center rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-10 p-2 focus:ring-primary focus:border-primary"
+                          x-model.number="addonQuantities[addon.id]"
+                        />
+                      </div>
+                    </template>
+                  </div>
+                </div>
 
                 <!-- Contact Information -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -134,13 +157,9 @@
                   <textarea class="form-textarea block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-3.5 text-base focus:ring-primary focus:border-primary" id="notes" placeholder="أي طلبات خاصة؟" rows="2" x-model="formData.notes"></textarea>
                 </div>
 
-                <!-- Catering Request -->
-                <div class="border-t border-gray-200 dark:border-gray-700 pt-6 space-y-4">
-                  <label class="flex items-center gap-x-3 cursor-pointer">
-                    <input class="form-checkbox h-6 w-6 rounded border-gray-300 dark:border-gray-600 text-accent focus:ring-accent checked:bg-accent checked:border-accent" type="checkbox" x-model="isCatering" />
-                    <span class="text-lg font-bold text-gray-800 dark:text-gray-200">طلب عزومة 🍗</span>
-                  </label>
-                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2" x-cloak x-show="isCatering" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 translate-y-0" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0 -translate-y-2" x-transition:leave-start="opacity-100 translate-y-0">
+                <!-- Catering-specific fields -->
+                <div x-cloak x-show="activeTab === 'catering'">
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
                     <div>
                       <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="people">عدد الأشخاص</label>
                       <input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 focus:ring-primary focus:border-primary" id="people" placeholder="15" type="number" x-model="formData.catering.people" />
@@ -170,14 +189,31 @@
     </div>
   </div>
 
-  <!-- إصلاح: إزالة المسافات من رابط Alpine.js -->
+  <!-- Alpine.js -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script>
     function orderForm() {
+      // دالة مساعدة لإنشاء كائن كميات الإضافات
+      const initAddonQuantities = () => {
+        const addons = [
+          { id: 'rice_pudding', name: 'رز بلبن', price: 20 },
+          { id: 'daqoos', name: 'دقوس', price: 20 },
+          { id: 'honey', name: 'عسل', price: 20 },
+          { id: 'yogurt', name: 'رايب', price: 20 },
+          { id: 'small_water', name: 'زجاجه مياه صغيره', price: 10 },
+          { id: 'large_water', name: 'زجاجه مياه كبيره', price: 15 }
+        ];
+        const quantities = {};
+        addons.forEach(addon => quantities[addon.id] = 0);
+        return { addons, quantities };
+      };
+
+      const { addons, quantities } = initAddonQuantities();
+
       return {
+        activeTab: 'regular',
         formData: {
           mealQuantity: 1,
-          addons: [],
           name: '',
           mobile: '',
           address: '',
@@ -188,23 +224,16 @@
             time: ''
           }
         },
-        isCatering: false,
-        // ✅ تم حذف "زيادة تومية"
-      addons: [
-  { id: 'rice_pudding', name: 'رز بلبن', price: 20 },
-  { id: 'daqoos', name: 'دقوس', price: 20 },
-  { id: 'honey', name: 'عسل', price: 20 },
-  { id: 'yogurt', name: 'رايب', price: 20 },
-  { id: 'small_water', name: 'زجاجه مياه صغيره', price: 10 },
-  { id: 'large_water', name: 'زجاجه مياه كبيره', price: 15 }
-],
+        addons: addons,
+        addonQuantities: quantities,
+
         submitOrder() {
           let message = `*طلب جديد من مرتاح دجاج* 🍗\n\n`;
           message += `*الاسم:* ${this.formData.name}\n`;
           message += `*رقم الموبايل:* ${this.formData.mobile}\n`;
           message += `*العنوان:* ${this.formData.address}\n\n`;
 
-          if (this.isCatering) {
+          if (this.activeTab === 'catering') {
             message += `*-- طلب عزومة --*\n`;
             message += `*عدد الأشخاص:* ${this.formData.catering.people}\n`;
             message += `*التاريخ:* ${this.formData.catering.date}\n`;
@@ -214,8 +243,16 @@
             message += `*عدد الوجبات:* ${this.formData.mealQuantity}\n`;
           }
 
-          if (this.formData.addons.length > 0) {
-            message += `*الإضافات:*\n- ${this.formData.addons.join('\n- ')}\n\n`;
+          // جمع الإضافات المختارة (الكمية > 0)
+          const selectedAddons = [];
+          this.addons.forEach(addon => {
+            const qty = this.addonQuantities[addon.id];
+            if (qty > 0) {
+              selectedAddons.push(`${addon.name} × ${qty}`);
+            }
+          });
+          if (selectedAddons.length > 0) {
+            message += `*الإضافات:*\n- ${selectedAddons.join('\n- ')}\n\n`;
           }
 
           if (this.formData.notes) {
@@ -224,10 +261,24 @@
 
           message += `---------------------\nشكراً لاختياركم مرتاح دجاج`;
 
-          // ✅ رقم الواتساب الجديد: 01033496278 → 201033496278
           const phone = "201030380101";
           const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
           window.open(whatsappUrl, '_blank');
+
+          // ✅ تصفير جميع الحقول بعد الإرسال
+          this.formData = {
+            mealQuantity: 1,
+            name: '',
+            mobile: '',
+            address: '',
+            notes: '',
+            catering: { people: '', date: '', time: '' }
+          };
+          this.activeTab = 'regular';
+          // تصفير كميات الإضافات
+          const resetQuantities = {};
+          this.addons.forEach(addon => resetQuantities[addon.id] = 0);
+          this.addonQuantities = resetQuantities;
         }
       }
     }
