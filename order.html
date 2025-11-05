@@ -255,7 +255,22 @@
     return;
   }
 
-  let message = `*طلب جديد من مرتاح دجاج* 🍗\n\n`;
+  // جلب وتحديث الرقم التسلسلي
+  let serial = localStorage.getItem('orderSerial');
+  serial = serial ? parseInt(serial, 10) + 1 : 1001; // يبدأ من 1001
+  localStorage.setItem('orderSerial', serial.toString());
+
+  // التاريخ والوقت الحاليان
+  const now = new Date();
+  const dateStr = now.toISOString().split('T')[0]; // YYYY-MM-DD
+  let hours = now.getHours();
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  const timeStr = `${hours}:${minutes} ${ampm}`;
+
+  let message = `*Order Serial:* #${serial}\n*Date:* ${dateStr}\n*Time:* ${timeStr}\n\n`;
+  message += `*طلب جديد من مرتاح دجاج* 🍗\n\n`;
   message += `*الاسم:* ${this.formData.name}\n`;
   message += `*رقم الموبايل:* ${this.formData.mobile}\n`;
   message += `*العنوان:* ${this.formData.address}\n\n`;
