@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <!-- Primary Meta Tags -->
-  <title>مرتاح دجاج</title>
-  <meta name="description" content="مرتاح دجاج يقدم ألذ أطباق الكبسة والدجاج المشوي الطازج بأسعار مناسبة في القاهرة. توصيل سريع – وجبات عربية أصيلة – خدمة عملاء 24/7. اطلب الآن عبر الواتساب!" />
-  <meta name="keywords" content="أكل، كبسة، رز، وجبات، مطعم، مطاعم مصر، أكل بيتي، أكل عربي، دليفري، طلب أكل، فراخ مشوية، وجبة جاهزة، أكل سريع، مطعم كبسة، أفضل مطعم، أكل طازج، مشاوي، food, rice, kabsa, chicken, restaurant, delivery, Cairo food, home meal, Arabic food, grilled chicken, best restaurant, fast food" />
-  <meta name="robots" content="index, follow" />
+  <title>مرتاح دجاج | كبسة ودجاج مشوي | توصيل الشروق والقاهرة</title>
+  <meta name="description" content="أقوى كبسة ودجاج مشوي بطعم سعودي أصيل مع توصيل سريع للشروق والقاهرة. وجبات فردية وعائلية بأسعار مناسبة. اطلب الآن على واتساب وخليك مرتاح!">
+    <meta name="robots" content="index, follow" />
 
   <!-- Canonical & Sitemap -->
-  <link rel="canonical" href="https://mertahchicken.com/" />
+  <link rel="canonical" href="https://mirtah-dajaj.netlify.app/" />
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
   <!-- Favicon -->
@@ -22,34 +21,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
   <!-- Structured Data (Schema.org) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": ["Restaurant", "LocalBusiness"],
-    "name": "مرتاح دجاج",
-    "address": "القاهرة، مصر",
-    "telephone": "+201030380101",
-    "priceRange": "200 - 300 EGP",
-    "servesCuisine": ["Arabic", "Saudi", "Grilled", "Chicken", "Kabsa"],
-    "openingHours": "Mo-Su 12:00-00:00",
-    "geo": {"latitude": 30.0444, "longitude": 31.2357},
-    "aggregateRating": {"ratingValue": "4.9", "reviewCount": "250"}
-  }
-  </script>
+  
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Restaurant", "LocalBusiness"],
+      "@id": "https://mertahchicken.com/#restaurant",
+      "name": "مرتاح دجاج",
+      "url": "https://mertahchicken.com/",
+      "image": "https://mertahchicken.com/public/mertah.webp",
+      "description": "مطعم كبسة ودجاج مشوي بطعم سعودي أصيل مع توصيل سريع للشروق والقاهرة.",
+      "telephone": "+201030380101",
+      "priceRange": "EGP 200-300",
+      "servesCuisine": ["Saudi","Arabic","Grilled Chicken","Kabsa"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "الشروق",
+        "addressRegion": "القاهرة",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 30.0444,
+        "longitude": 31.2357
+      },
+      "openingHoursSpecification": [
+        {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"12:00","closes":"24:00"}
+      ],
+      "aggregateRating": {"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"250"}
+    }
+  ]
+}
+</script>
+
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://mertahchicken.com/" />
+  <meta property="og:url" content="https://mirtah-dajaj.netlify.app/" />
   <meta property="og:title" content="مرتاح دجاج – أفضل مطعم كبسة في مصر" />
   <meta property="og:description" content="وجبات دجاج مشوي وكبسة طازجة بأسعار مذهلة! توصيل سريع لجميع أنحاء القاهرة." />
-  <meta property="og:image" content="https://mertahchicken.com/public/mertah.webp" />
+  <meta property="og:image" content="https://mirtah-dajaj.netlify.app/public/mertah.webp" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://mertahchicken.com/" />
+  <meta name="twitter:url" content="https://mirtah-dajaj.netlify.app/" />
   <meta name="twitter:title" content="مرتاح دجاج – طعم يريحك!" />
   <meta name="twitter:description" content="أفضل وجبة كَبسة دجاج في مصر. اطلب الآن واستمتع بتوصيل سريع!" />
-  <meta name="twitter:image" content="https://mertahchicken.com/public/mertah.webp" />
+  <meta name="twitter:image" content="https://mirtah-dajaj.netlify.app/public/mertah.webp" />
 
   <!-- Google Search Console -->
   <meta name="google-site-verification" content="KpjWQkUqfESiMFIYB4kaC86UFFcCRZ7mjcKROk0dGcQ" />
@@ -350,6 +370,16 @@
       </div>
     </div>
   </section>
+
+<section id="faq" class="py-12 bg-gray-50 dark:bg-gray-900/30">
+  <div class="max-w-3xl mx-auto px-6 text-right">
+    <h2 class="text-3xl font-bold mb-6">أسئلة شائعة</h2>
+    <details class="mb-4"><summary class="font-semibold cursor-pointer">هل يوجد توصيل للشروق والقاهرة؟</summary><p class="mt-2 text-gray-700 dark:text-gray-300">نعم، نوصل للشروق ومعظم مناطق القاهرة يوميًا.</p></details>
+    <details class="mb-4"><summary class="font-semibold cursor-pointer">هل الوجبات تُحضّر لحظة الطلب؟</summary><p class="mt-2 text-gray-700 dark:text-gray-300">نعم، جميع الوجبات تُحضّر طازجة وقت الطلب.</p></details>
+    <details class="mb-4"><summary class="font-semibold cursor-pointer">هل توجد وجبات عائلية؟</summary><p class="mt-2 text-gray-700 dark:text-gray-300">نعم، يوجد وجبات عائلية تكفي من 3 إلى 6 أشخاص.</p></details>
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer class="bg-gray-100 dark:bg-background-dark/80 py-6">
