@@ -106,7 +106,7 @@
                   <select
                     class="block appearance-none w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 pr-10 text-base focus:ring-primary focus:border-primary"
                     id="meal-quantity"
-                    x-model="formData.mealQuantity"
+                    x-model="formData.mealQuantity" @change="calculateTotal()"
                   >
                     <template x-for="i in 10" :key="i">
                       <option :value="i" x-text="i"></option>
@@ -127,7 +127,7 @@
         <div class="flex items-center space-x-2 rtl:space-x-reverse">
           <button
             type="button"
-            @click="addonQuantities[addon.id] > 0 ? addonQuantities[addon.id]-- : 0"
+            @click="addonQuantities[addon.id] > 0 ? addonQuantities[addon.id]-- : 0; calculateTotal()"
             class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
           >
             –
@@ -138,7 +138,7 @@
           ></span>
           <button
             type="button"
-            @click="addonQuantities[addon.id] < 10 ? addonQuantities[addon.id]++ : 10"
+            @click="addonQuantities[addon.id] < 10 ? addonQuantities[addon.id]++; calculateTotal()"
             class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
           >
             +
@@ -188,6 +188,11 @@
                   </div>
                 </div>
 
+                <!-- الإجمالي -->
+                <div class="text-center text-xl font-bold text-gray-800 dark:text-gray-100">
+                  الإجمالي: <span x-text="totalPrice"></span> جنيه <span class="text-sm">+ التوصيل</span>
+                </div>
+
                 <!-- CTA Button -->
                 <div class="pt-4">
                   <button @click="submitOrder" class="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-4 bg-primary text-white text-lg font-bold leading-normal tracking-wide shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-4 focus:ring-primary/40 transition-all duration-200">
@@ -205,6 +210,10 @@
   <!-- Alpine.js -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script>
+    const MEAL_PRICES = {
+        "وجبه النص فرخه": 120,
+        "وجبه الفرخه الكامله": 220
+      };
     function orderForm() {
       // دالة مساعدة لإنشاء كائن كميات الإضافات
       const initAddonQuantities = () => {
@@ -218,10 +227,16 @@
         ];
         const quantities = {};
         addons.forEach(addon => quantities[addon.id] = 0);
-        return { addons, quantities };
+        return {
+        totalPrice: 0, addons, quantities },
+        init() { setTimeout(() => this.calculateTotal(), 50); };
       };
 
       const { addons, quantities } = initAddonQuantities();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const mealName = urlParams.get("meal") || "وجبة";
+      const mealPrice = MEAL_PRICES[mealName] || 0;
 
       return {
         activeTab: 'regular',
@@ -239,6 +254,13 @@
         },
         addons: addons,
         addonQuantities: quantities,
+
+        calculateTotal() {
+          let mealsTotal = this.formData.mealQuantity * mealPrice;
+          let addonsTotal = 0;
+          this.addons.forEach(a => addonsTotal += this.addonQuantities[a.id] * a.price);
+          this.totalPrice = mealsTotal + addonsTotal;
+        },
 
         submitOrder() {
   // التحقق من الحقول المطلوبة
@@ -300,6 +322,10 @@
   if (this.formData.notes) {
     message += `*ملاحظات:* ${this.formData.notes}\n`;
   }
+
+  message += `*الإجمالي بدون توصيل:* ${this.totalPrice} جنيه
+
+`;
 
   message += `---------------------\nشكراً لاختياركم مرتاح دجاج`;
 
