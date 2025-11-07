@@ -304,9 +304,11 @@
     message += `*التاريخ:* ${this.formData.catering.date}\n`;
     message += `*الساعة:* ${this.formData.catering.time}\n\n`;
   } else {
-    message += `*-- طلب عادي --*\n`;
-    message += `*عدد الوجبات:* ${this.formData.mealQuantity}\n`;
-  }
+  message += `*-- طلب عادي --*\n`;
+  message += `*الوجبة:* ${mealName}\n`;
+  message += `*عدد الوجبات:* ${this.formData.mealQuantity}\n`;
+}
+
 
   // جمع الإضافات المختارة (الكمية > 0)
   const selectedAddons = [];
