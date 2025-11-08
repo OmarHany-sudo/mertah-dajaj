@@ -99,6 +99,10 @@
                 </button>
               </div>
 
+              <div class="text-center text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+  <span x-text="mealName"></span>
+</div>
+
               <!-- النموذج -->
               <div class="space-y-6">
                 <!-- Meal Quantity -->
@@ -232,7 +236,7 @@
         return { addons, quantities };
       };
 
-      const { addons, quantities } = initAddonQuantities();
+      const { mealName, addons, quantities } = initAddonQuantities();
 
       const urlParams = new URLSearchParams(window.location.search);
       const mealName = urlParams.get("meal") || "وجبة";
