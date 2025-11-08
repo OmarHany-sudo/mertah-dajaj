@@ -236,13 +236,14 @@
         return { addons, quantities };
       };
 
-      const { mealName, addons, quantities } = initAddonQuantities();
+      const { addons, quantities } = initAddonQuantities();
 
       const urlParams = new URLSearchParams(window.location.search);
       const mealName = urlParams.get("meal") || "وجبة";
       const mealPrice = MEAL_PRICES[mealName] || 0;
 
       return {
+        mealName,
         activeTab: 'regular',
         formData: {
           mealQuantity: 1,
