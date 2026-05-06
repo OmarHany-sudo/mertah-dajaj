@@ -99,15 +99,22 @@
   </header>
 
   <!-- Mobile Menu (Overlay) -->
-  <div id="mobile-menu" class="fixed inset-0 z-[150] bg-brand-dark/95 backdrop-blur-xl hidden flex-col items-center justify-center gap-8 text-2xl text-white">
-    <button id="mobile-close" class="absolute top-8 right-8 p-2">
-      <span class="material-symbols-outlined text-4xl">close</span>
-    </button>
-    <a href="#menu" class="mobile-link">القائمة</a>
-    <a href="#reviews" class="mobile-link">آراء العملاء</a>
-    <a href="#contact" class="mobile-link">تواصل معنا</a>
-    <a href="order.html" class="bg-brand-gold text-brand-dark px-10 py-3 rounded-full font-black">اطلب الآن</a>
-  </div>
+<div id="mobile-menu"
+  class="fixed inset-0 z-[9999] bg-brand-dark/95 backdrop-blur-xl hidden flex flex-col items-center justify-center gap-8 text-2xl text-white">
+
+  <button id="mobile-close" class="absolute top-8 right-8 p-2 z-[10000]">
+    <span class="material-symbols-outlined text-4xl">close</span>
+  </button>
+
+  <a href="#menu" class="mobile-link">القائمة</a>
+  <a href="#reviews" class="mobile-link">آراء العملاء</a>
+  <a href="#contact" class="mobile-link">تواصل معنا</a>
+
+  <a href="order.html"
+    class="bg-brand-gold text-brand-dark px-10 py-3 rounded-full font-black">
+    اطلب الآن
+  </a>
+</div>
 
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
