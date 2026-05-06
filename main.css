@@ -1,0 +1,108 @@
+/* src/styles/main.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Arabic:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;500;700&display=swap');
+
+:root {
+  /* Core Palette - Luxury Restaurant Theme */
+  --brand-primary: #8b0000;      /* Deep Crimson */
+  --brand-primary-light: #b22222;
+  --brand-secondary: #D4AF37;    /* Metallic Gold */
+  --brand-secondary-light: #F1D382;
+  
+  --bg-light: #fdfcfb;
+  --bg-dark: #0f0505;            /* Near black with red tint */
+  --bg-surface-light: #ffffff;
+  --bg-surface-dark: #1a0a0a;
+  
+  --text-primary-light: #1a0a0a;
+  --text-primary-dark: #fdfcfb;
+  --text-muted-light: #6b7280;
+  --text-muted-dark: #9ca3af;
+  
+  --glass-light: rgba(255, 255, 255, 0.7);
+  --glass-dark: rgba(26, 10, 10, 0.7);
+  
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Noto Sans Arabic', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Noto Serif Arabic', serif;
+}
+
+/* Premium Utilities */
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--brand-secondary), var(--brand-secondary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hover-lift {
+  transition: var(--transition-smooth);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-primary);
+  border-radius: 10px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Skeleton Loading Effect */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

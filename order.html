@@ -1,367 +1,259 @@
 <!DOCTYPE html>
-<html class="light" dir="rtl" lang="ar">
+<html lang="ar" dir="rtl" class="light">
 <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>اطلب الآن من مرتاح دجاج</title>
-  <!-- إصلاح: إزالة المسافة من رابط CDN -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تأكيد الطلب | مرتاح دجاج</title>
+  
+  <link rel="stylesheet" href="main.css">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <script>
     tailwind.config = {
-      darkMode: "class",
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            "primary": "#b22222",
-            "accent": "#eab308",
-            "background-light": "#f8f6f6",
-            "background-dark": "#211111",
-          },
-          fontFamily: {
-            "display": ["Noto Sans Arabic", "Noto Serif", "sans-serif"]
-          },
-          borderRadius: {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "full": "9999px"
-          },
-        },
-      },
-    }
-  </script>
-  <style>
-    body {
-      font-family: 'Noto Sans Arabic', 'Noto Serif', sans-serif;
-    }
-
-    [x-cloak] {
-      display: none !important;
-    }
-
-    .form-input:focus,
-    .form-select:focus,
-    .form-textarea:focus {
-      border-color: #b22222;
-      box-shadow: 0 0 0 2px rgba(178, 34, 34, 0.2);
-      outline: none;
-    }
-
-    .form-checkbox:checked {
-      background-color: #b22222;
-      border-color: #b22222;
-    }
-  </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark font-display">
-  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden" x-data="orderForm()">
-    <div class="layout-container flex h-full grow flex-col">
-      <div class="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
-        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-          <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700 px-4 sm:px-6 lg:px-10 py-3">
-            <div class="flex items-center gap-4 text-gray-800 dark:text-white">
-              <div class="size-8 text-primary">
-                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="m21.84 10.2-5.1-1.22L14.32 4a1.05 1.05 0 0 0-1.93 0L10 8.98l-5.1 1.22a1 1 0 0 0-.64 1.74l3.8 3.56-.94 5.22a1 1 0 0 0 1.48 1.08l4.4-2.43 4.4 2.43a1 1 0 0 0 1.48-1.08l-.94-5.22 3.8-3.56a1 1 0 0 0-.64-1.74ZM15.3 15l.6 3.2L12 16.48 8.1 18.2l.6-3.2L6.1 12.4l3.18-.76L11 8.52l1.72 3.12 3.18.76L15.3 15Z"></path>
-                </svg>
-              </div>
-              <h2 class="text-xl font-bold tracking-tight">مرتاح دجاج</h2>
-            </div>
-            <div class="flex flex-1 justify-end gap-8">
-              <div class="flex items-center gap-9">
-                <a class="text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-primary dark:hover:text-primary" href="./index.html">الرئيسية</a>
-              </div>
-            </div>
-          </header>
-          <main class="flex-1 p-4 sm:p-6 lg:p-8">
-            <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 sm:p-8 space-y-8">
-              <div class="text-center">
-                <p class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">اطلب الآن من مرتاح دجاج</p>
-              </div>
-
-              <!-- التبويبات -->
-              <div class="flex justify-center gap-4 mb-6">
-                <button
-                  @click="activeTab = 'regular'"
-                  class="px-6 py-2 font-bold rounded-lg transition-colors"
-                  :class="activeTab === 'regular' ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'"
-                >
-                  طلب عادي
-                </button>
-                <button
-                  @click="activeTab = 'catering'"
-                  class="px-6 py-2 font-bold rounded-lg transition-colors"
-                  :class="activeTab === 'catering' ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'"
-                >
-                  عزومة
-                </button>
-              </div>
-
-              <div class="text-center text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-  <span x-text="mealName"></span>
-</div>
-
-              <!-- النموذج -->
-<div class="space-y-6">
-
-  <!-- Meal Quantity -->
-  <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2">
-    عدد الوجبات
-  </label>
-
-  <div class="relative">
-    <select
-      class="block appearance-none w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 pr-10 text-base focus:ring-primary focus:border-primary"
-      id="meal-quantity"
-      x-model="formData.mealQuantity"
-      @change="calculateTotal()"
-    >
-      <template x-for="i in 10" :key="i">
-        <option :value="i" x-text="i"></option>
-      </template>
-    </select>
-    <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-    </svg>
-  </div>
-
-
-                <!-- Add-ons with stepper quantity -->
-<div>
-  <p class="text-base font-medium text-gray-800 dark:text-gray-200 pb-2">الإضافات</p>
-  <div class="space-y-3">
-    <template x-for="addon in addons" :key="addon.id">
-      <div class="flex items-center justify-between gap-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
-        <span class="text-base text-gray-800 dark:text-gray-200" x-text="`${addon.name} - ${addon.price} جنيه`"></span>
-        <div class="flex items-center space-x-2 rtl:space-x-reverse">
-          <button
-            type="button"
-            @click="addonQuantities[addon.id] > 0 ? (addonQuantities[addon.id]--, calculateTotal()) : 0"
-            class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
-          >
-            –
-          </button>
-          <span
-            class="w-8 text-center font-medium text-gray-900 dark:text-gray-100"
-            x-text="addonQuantities[addon.id]"
-          ></span>
-          <button
-            type="button"
-            @click="addonQuantities[addon.id] < 10 ? (addonQuantities[addon.id]++, calculateTotal()) : 10"
-            class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
-          >
-            +
-          </button>
-        </div>
-      </div>
-    </template>
-  </div>
-</div>
-                <!-- Contact Information -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="name">الاسم</label>
-                    <input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 h-14 p-3.5 text-base focus:ring-primary focus:border-primary" id="name" placeholder="ادخل اسمك" type="text" x-model="formData.name" />
-                  </div>
-                  <div>
-                    <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="mobile">رقم الموبايل</label>
-                    <input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 h-14 p-3.5 text-base focus:ring-primary focus:border-primary" id="mobile" placeholder="مثال: 01033496278" type="tel" x-model="formData.mobile" />
-                  </div>
-                </div>
-
-                <!-- Delivery Details -->
-                <div>
-                  <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="address">العنوان بالتفصيل</label>
-                  <textarea class="form-textarea block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-3.5 text-base focus:ring-primary focus:border-primary" id="address" placeholder="الحي، الشارع، رقم المبنى..." rows="3" x-model="formData.address"></textarea>
-                </div>
-                <div>
-                  <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="notes">ملاحظات إضافية</label>
-                  <textarea class="form-textarea block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-3.5 text-base focus:ring-primary focus:border-primary" id="notes" placeholder="أي طلبات خاصة؟" rows="2" x-model="formData.notes"></textarea>
-                </div>
-
-                <!-- Catering-specific fields -->
-                <div x-cloak x-show="activeTab === 'catering'">
-                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                    <div>
-                      <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="people">عدد الأشخاص</label>
-                      <input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 focus:ring-primary focus:border-primary" id="people" placeholder="15" type="number" x-model="formData.catering.people" />
-                    </div>
-                    <div>
-                      <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="date">التاريخ</label>
-                      <input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 focus:ring-primary focus:border-primary" id="date" type="date" x-model="formData.catering.date" />
-                    </div>
-                    <div>
-                      <label class="block text-base font-medium text-gray-800 dark:text-gray-200 pb-2" for="time">الساعة</label>
-                      <input class="form-input block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 h-14 p-3.5 focus:ring-primary focus:border-primary" id="time" type="time" x-model="formData.catering.time" />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Total display -->
-                <div class="text-center text-xl font-bold text-gray-800 dark:text-gray-100">
-                  الإجمالي: <span x-text="totalPrice"></span> جنيه <span class="text-sm">+ التوصيل</span>
-                </div>
-
-                <!-- CTA Button -->
-                <div class="pt-4">
-                  <button @click="submitOrder" class="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-4 bg-primary text-white text-lg font-bold leading-normal tracking-wide shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-4 focus:ring-primary/40 transition-all duration-200">
-                    <span class="truncate">أكد الطلب على واتساب 💬</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Alpine.js -->
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script>
-    const MEAL_PRICES = {
-      "وجبه النص فرخه": 222,
-      "وجبه الفرخه الكامله": 444
-    };
-
-    function orderForm() {
-      // دالة مساعدة لإنشاء كائن كميات الإضافات
-      const initAddonQuantities = () => {
-        const addons = [
-          { id: 'rice_pudding', name: 'رز بلبن', price: 15 },
-          { id: 'daqoos', name: 'دقوس', price: 7 },
-          { id: 'honey', name: 'عسل', price: 10 },
-          { id: 'yogurt', name: 'رايب', price: 20 },
-          { id: 'small_water', name: 'زجاجه مياه صغيره', price: 5 },
-          { id: 'large_water', name: 'زجاجه مياه كبيره', price: 10 }
-        ];
-        const quantities = {};
-        addons.forEach(addon => quantities[addon.id] = 0);
-        return { addons, quantities };
-      };
-
-      const { addons, quantities } = initAddonQuantities();
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const mealName = urlParams.get("meal") || "وجبة";
-      const mealPrice = MEAL_PRICES[mealName] || 0;
-
-      return {
-        mealName,
-        activeTab: 'regular',
-        formData: {
-          mealQuantity: 1,
-          name: '',
-          mobile: '',
-          address: '',
-          notes: '',
-          catering: {
-            people: '',
-            date: '',
-            time: ''
+            brand: {
+              primary: '#8b0000',
+              gold: '#D4AF37',
+              dark: '#0f0505',
+              surface: '#1a0a0a',
+            }
           }
         },
-        addons: addons,
-        addonQuantities: quantities,
-        totalPrice: 0,
+      },
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-[#fdfcfb] dark:bg-brand-dark text-brand-dark dark:text-white" x-data="orderFlow()">
 
-        calculateTotal() {
-          let mealsTotal = this.formData.mealQuantity * mealPrice;
-          let addonsTotal = 0;
-          this.addons.forEach(a => addonsTotal += this.addonQuantities[a.id] * a.price);
-          this.totalPrice = mealsTotal + addonsTotal;
+  <!-- Compact Premium Header -->
+  <header class="py-6 px-4 mb-8">
+    <div class="container mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-brand-primary">arrow_forward</span>
+        <span class="font-bold">العودة للرئيسية</span>
+      </a>
+      <div class="text-xl font-black">مرتاح <span class="text-brand-gold">دجاج</span></div>
+      <div class="size-8"></div> <!-- Spacer -->
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 pb-24">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+      
+      <!-- Order Form -->
+      <div class="lg:col-span-7 space-y-8 animate-fade-in-up">
+        <div class="space-y-2">
+          <h1 class="text-4xl font-black">تفاصيل الطلب</h1>
+          <p class="text-gray-500 dark:text-gray-400 text-lg">أكمل بياناتك لتأكيد الطلب عبر واتساب</p>
+        </div>
+
+        <!-- Form Steps -->
+        <div class="bg-white dark:bg-brand-surface p-8 rounded-[2rem] border border-black/5 dark:border-white/5 shadow-xl space-y-8">
+          
+          <!-- Tab Switcher -->
+          <div class="flex p-1 bg-gray-100 dark:bg-black/20 rounded-2xl">
+             <button @click="activeTab = 'regular'" :class="activeTab === 'regular' ? 'bg-white dark:bg-brand-surface shadow-md' : 'text-gray-500'" class="flex-1 py-3 rounded-xl font-bold transition-all">طلب عادي</button>
+             <button @click="activeTab = 'catering'" :class="activeTab === 'catering' ? 'bg-white dark:bg-brand-surface shadow-md' : 'text-gray-500'" class="flex-1 py-3 rounded-xl font-bold transition-all">عزومة 👨‍👩‍👧‍👦</button>
+          </div>
+
+          <div class="space-y-6">
+            <!-- Selected Meal -->
+            <div class="p-4 rounded-2xl bg-brand-gold/10 border border-brand-gold/20 flex justify-between items-center">
+              <div>
+                <div class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-1">الوجبة المختارة</div>
+                <div class="text-xl font-black" x-text="mealName"></div>
+              </div>
+              <div class="text-right">
+                 <div class="text-xs text-gray-400">سعر الوحدة</div>
+                 <div class="font-bold" x-text="`${mealPrice} ج.م` font-bold"></div>
+              </div>
+            </div>
+
+            <!-- Quantity -->
+            <div>
+              <label class="block font-bold mb-3">عدد الوجبات</label>
+              <div class="flex items-center gap-4">
+                <button @click="qty > 1 ? qty-- : null; calculate()" class="size-12 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center hover:bg-brand-primary hover:text-white transition-colors">-</button>
+                <input type="number" x-model="qty" @input="calculate()" class="w-20 text-center text-xl font-black bg-transparent border-none focus:ring-0">
+                <button @click="qty++; calculate()" class="size-12 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center hover:bg-brand-primary hover:text-white transition-colors">+</button>
+              </div>
+            </div>
+
+            <!-- Add-ons -->
+            <div>
+               <label class="block font-bold mb-4">إضافات مميزة ✨</label>
+               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                 <template x-for="addon in addons" :key="addon.id">
+                    <button @click="toggleAddon(addon)" :class="isAddonSelected(addon) ? 'border-brand-primary bg-brand-primary/5' : 'border-black/5 dark:border-white/5 bg-gray-50 dark:bg-white/5'" class="flex items-center justify-between p-4 rounded-2xl border transition-all text-right">
+                      <div>
+                        <div class="font-bold" x-text="addon.name"></div>
+                        <div class="text-xs text-gray-500" x-text="`+ ${addon.price} ج.م`"></div>
+                      </div>
+                      <span class="material-symbols-outlined text-brand-primary" x-show="isAddonSelected(addon)">check_circle</span>
+                    </button>
+                 </template>
+               </div>
+            </div>
+
+            <hr class="border-black/5 dark:border-white/5">
+
+            <!-- Personal Info -->
+            <div class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label class="text-sm font-bold opacity-60">الاسم بالكامل</label>
+                  <input type="text" x-model="name" placeholder="محمد أحمد" class="w-full px-5 py-3 rounded-2xl bg-gray-50 dark:bg-white/5 border-none focus:ring-2 focus:ring-brand-gold">
+                </div>
+                <div class="space-y-2">
+                  <label class="text-sm font-bold opacity-60">رقم الموبايل</label>
+                  <input type="tel" x-model="phone" placeholder="01xxxxxxxxx" class="w-full px-5 py-3 rounded-2xl bg-gray-50 dark:bg-white/5 border-none focus:ring-2 focus:ring-brand-gold">
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label class="text-sm font-bold opacity-60">العنوان بالتفصيل</label>
+                <textarea x-model="address" placeholder="الحي، الشارع، رقم الشقة..." class="w-full px-5 py-3 rounded-2xl bg-gray-50 dark:bg-white/5 border-none focus:ring-2 focus:ring-brand-gold h-24"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary (Sticky) -->
+      <div class="lg:col-span-5">
+        <div class="sticky top-24 space-y-6 animate-fade-in-up [animation-delay:200ms]">
+          <div class="bg-brand-dark text-white p-8 rounded-[2rem] shadow-2xl overflow-hidden relative">
+            <div class="absolute -top-10 -right-10 size-40 bg-brand-primary/20 blur-3xl rounded-full"></div>
+            
+            <h2 class="text-2xl font-black mb-8 relative z-10">ملخص الطلب</h2>
+            
+            <div class="space-y-4 relative z-10">
+              <div class="flex justify-between items-center opacity-70">
+                <span>الوجبة (${qty})</span>
+                <span x-text="`${qty * mealPrice} ج.م`"></span>
+              </div>
+              
+              <template x-for="a in selectedAddons" :key="a.id">
+                <div class="flex justify-between items-center opacity-70">
+                  <span x-text="a.name"></span>
+                  <span x-text="`${a.price} ج.م`"></span>
+                </div>
+              </template>
+
+              <div class="h-px bg-white/10 my-6"></div>
+
+              <div class="flex justify-between items-end">
+                <div>
+                  <div class="text-xs uppercase tracking-widest opacity-50 mb-1">الإجمالي الكلي</div>
+                  <div class="text-4xl font-black text-brand-gold" x-text="`${total} ج.م` font-black text-brand-gold"></div>
+                </div>
+                <div class="text-xs opacity-50">+ مصاريف التوصيل</div>
+              </div>
+            </div>
+
+            <button @click="submitOrder" class="w-full mt-10 bg-brand-gold text-brand-dark py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 hover:bg-white transition-all active:scale-95 group">
+              <span>تأكيد الطلب الآن</span>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="size-6 group-hover:scale-125 transition-transform" alt="WA">
+            </button>
+            
+            <p class="text-center mt-6 text-sm opacity-40">سيتم توجيهك إلى واتساب لإتمام الطلب</p>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="grid grid-cols-2 gap-4">
+             <div class="p-4 rounded-2xl bg-white dark:bg-brand-surface border border-black/5 dark:border-white/5 text-center">
+                <span class="material-symbols-outlined text-brand-gold text-3xl mb-2">speed</span>
+                <div class="text-xs font-bold">توصيل سريع</div>
+             </div>
+             <div class="p-4 rounded-2xl bg-white dark:bg-brand-surface border border-black/5 dark:border-white/5 text-center">
+                <span class="material-symbols-outlined text-brand-gold text-3xl mb-2">verified</span>
+                <div class="text-xs font-bold">مكونات طازجة</div>
+             </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function orderFlow() {
+      const MEAL_PRICES = {
+        "وجبه النص فرخه": 222,
+        "وجبه الفرخه الكامله": 444
+      };
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const mealName = urlParams.get("meal") || "وجبة مخصصة";
+
+      return {
+        activeTab: 'regular',
+        mealName,
+        mealPrice: MEAL_PRICES[mealName] || 222,
+        qty: 1,
+        name: '',
+        phone: '',
+        address: '',
+        total: 0,
+        addons: [
+          { id: 'rice_pudding', name: 'رز بلبن', price: 15 },
+          { id: 'daqoos', name: 'دقوس إضافي', price: 7 },
+          { id: 'honey', name: 'عسل إضافي', price: 10 },
+          { id: 'yogurt', name: 'رايب', price: 20 },
+          { id: 'water_s', name: 'مياه معدنية', price: 5 }
+        ],
+        selectedAddons: [],
+
+        init() { this.calculate() },
+
+        calculate() {
+          let addonTotal = this.selectedAddons.reduce((sum, a) => sum + a.price, 0);
+          this.total = (this.qty * this.mealPrice) + addonTotal;
+        },
+
+        toggleAddon(addon) {
+          const index = this.selectedAddons.findIndex(a => a.id === addon.id);
+          if (index > -1) this.selectedAddons.splice(index, 1);
+          else this.selectedAddons.push(addon);
+          this.calculate();
+        },
+
+        isAddonSelected(addon) {
+          return this.selectedAddons.some(a => a.id === addon.id);
         },
 
         submitOrder() {
-  // التحقق من الحقول المطلوبة
-  if (!this.formData.name.trim()) {
-    alert("الاسم مطلوب");
-    return;
-  }
-  if (!this.formData.mobile.trim()) {
-    alert("رقم الموبايل مطلوب");
-    return;
-  }
-  if (!this.formData.address.trim()) {
-    alert("العنوان مطلوب");
-    return;
-  }
+          if (!this.name || !this.phone || !this.address) return alert("يرجى ملء جميع البيانات الأساسية");
+          
+          let serial = localStorage.getItem('orderSerial') || 1000;
+          serial = parseInt(serial) + 1;
+          localStorage.setItem('orderSerial', serial);
 
-  // جلب وتحديث الرقم التسلسلي
-  let serial = localStorage.getItem('orderSerial');
-  serial = serial ? parseInt(serial, 10) + 1 : 1001; // يبدأ من 1001
-  localStorage.setItem('orderSerial', serial.toString());
+          const time = new Date().toLocaleTimeString('ar-EG');
+          
+          let msg = `*Order Serial:* #${serial}\n*Time:* ${time}\n\n`;
+          msg += `*طلب جديد من مرتاح دجاج* 🍗\n\n`;
+          msg += `*الاسم:* ${this.name}\n`;
+          msg += `*الموبايل:* ${this.phone}\n`;
+          msg += `*العنوان:* ${this.address}\n\n`;
+          msg += `*-- الوجبة --*\n`;
+          msg += `${this.mealName} × ${this.qty}\n\n`;
+          
+          if (this.selectedAddons.length > 0) {
+            msg += `*-- الإضافات --*\n`;
+            this.selectedAddons.forEach(a => msg += `- ${a.name}\n`);
+            msg += `\n`;
+          }
+          
+          msg += `*الإجمالي:* ${this.total} ج.م\n\n`;
+          msg += `شكراً لاختياركم مرتاح دجاج ✨`;
 
-  // التاريخ والوقت الحاليان
-  const now = new Date();
-  const dateStr = now.toISOString().split('T')[0]; // YYYY-MM-DD
-  let hours = now.getHours();
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12 || 12;
-  const timeStr = `${hours}:${minutes} ${ampm}`;
-
-  let message = `*Order Serial:* #${serial}\n*Date:* ${dateStr}\n*Time:* ${timeStr}\n\n`;
-  message += `*طلب جديد من مرتاح دجاج* 🍗\n\n`;
-  message += `*الاسم:* ${this.formData.name}\n`;
-  message += `*رقم الموبايل:* ${this.formData.mobile}\n`;
-  message += `*العنوان:* ${this.formData.address}\n\n`;
-
-  if (this.activeTab === 'catering') {
-    message += `*-- طلب عزومة --*\n`;
-    message += `*عدد الأشخاص:* ${this.formData.catering.people}\n`;
-    message += `*التاريخ:* ${this.formData.catering.date}\n`;
-    message += `*الساعة:* ${this.formData.catering.time}\n\n`;
-  } else {
-  message += `*-- طلب عادي --*\n`;
-  message += `*الوجبة:* ${mealName}\n`;
-  message += `*عدد الوجبات:* ${this.formData.mealQuantity}\n`;
-}
-
-
-  // جمع الإضافات المختارة (الكمية > 0)
-  const selectedAddons = [];
-  this.addons.forEach(addon => {
-    const qty = this.addonQuantities[addon.id];
-    if (qty > 0) {
-      selectedAddons.push(`${addon.name} × ${qty}`);
-    }
-  });
-  if (selectedAddons.length > 0) {
-    message += `*الإضافات:*\n- ${selectedAddons.join('\n- ')}\n\n`;
-  }
-
-  if (this.formData.notes) {
-    message += `*ملاحظات:* ${this.formData.notes}\n`;
-  }
-
-  message += `*الإجمالي بدون توصيل:* ${this.totalPrice} جنيه\n\n`;
-
-  message += `---------------------\nشكراً لاختياركم مرتاح دجاج`;
-
-  const phone = "201030380101";
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
-  window.open(whatsappUrl, '_blank');
-
-  // ✅ تصفير جميع الحقول بعد الإرسال
-  this.formData = {
-    mealQuantity: 1,
-    name: '',
-    mobile: '',
-    address: '',
-    notes: '',
-    catering: { people: '', date: '', time: '' }
-  };
-  this.activeTab = 'regular';
-  // تصفير كميات الإضافات
-  const resetQuantities = {};
-  this.addons.forEach(addon => resetQuantities[addon.id] = 0);
-  this.addonQuantities = resetQuantities;
-},
-
-        init() { setTimeout(() => this.calculateTotal(), 50); }
+          const phone = "201551550061";
+          window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`, '_blank');
+        }
       }
     }
   </script>
